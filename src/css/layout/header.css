@@ -1,0 +1,7 @@
+header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+}

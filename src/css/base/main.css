@@ -1,0 +1,12 @@
+body {
+    font-family: 'grenadine-mvb', sans-serif;
+    background-color: #FBE5BC;
+    color: black;
+    transition: all 0.3s ease-out;
+}
+
+.dark-mode {
+    transition: all 0.3s ease-out;
+    background-color: #5A0908;
+    color: white
+}
