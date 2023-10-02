@@ -2,6 +2,6 @@ header {
     display: flex;
     justify-content: flex-end;
     padding: 1rem;
-    position: fixed;
+    position: sticky;
     top: 0;
 }
