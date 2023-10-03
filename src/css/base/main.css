@@ -8,5 +8,11 @@ body {
 .dark-mode {
     transition: all 0.3s ease-out;
     background-color: #5A0908;
-    color: white
+    color: white;
+}
+
+.dark-mode .hero .leaf_text {
+    
+    transition: all 0.3s ease-out;
+    fill: #FBE5BC;
 }
