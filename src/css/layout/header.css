@@ -1,7 +1,6 @@
 header {
-    display: flex;
-    justify-content: flex-end;
     padding: 1rem;
-    position: sticky;
+    position: fixed;
     top: 0;
+    right: 0;
 }

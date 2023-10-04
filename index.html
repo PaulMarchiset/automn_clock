@@ -76,6 +76,7 @@
     </div>
     <main>
         <nav>
+            
             <svg width="347" height="167" viewBox="0 0 347 167" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="CLOCK" class="staggering-axis-grid-clock">
                 <g class="leaf" id="yellow_leaf">
@@ -332,24 +333,65 @@
                 
         </section>
     </article>
-    <article id="countdown">
+    <section id="countdown" class="section-timer">
         <!-- <h2>Countdown Timer</h2> -->
-        <section id="down_form">
-                <form action="">
-                    <input type="number" name="down_m" id="down_m" value="0"> :
-                    <input type="number" name="down_s" id="down_s" value="10">
-                </form>
-                <button id="down_start">Start</button>
-                <button id="down_stop">Stop</button>
-        </section>
+                       <!-- SVG timer -->
+                       <div class="svg-timer-relative">
+                        <div class="svg-input-absolute">
+                        <input type="number" id="minutes" min="0" step="1" value="0">:<input type="number" id="seconds" min="0" step="1" value="10">
+                        </div>
+                    <svg id="timer" width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect id="1" x="245" width="10" height="41" fill="white"/>
+                <rect id="2" x="288.488" y="2.92969" width="10" height="41" transform="rotate(10 288.488 2.92969)" fill="white"/>
+                <rect id="3" x="330.807" y="13.3666" width="10" height="41" transform="rotate(20 330.807 13.3666)" fill="white"/>
+                <rect id="4" x="370.67" y="30.9935" width="10" height="41" transform="rotate(30 370.67 30.9935)" fill="white"/>
+                <rect id="5" x="406.867" y="55.2748" width="10" height="41" transform="rotate(40 406.867 55.2748)" fill="white"/>
+                <rect id="6" x="438.298" y="85.4728" width="10" height="41" transform="rotate(50 438.298 85.4728)" fill="white"/>
+                <rect id="7" x="464.007" y="120.67" width="10" height="41" transform="rotate(60 464.007 120.67)" fill="white"/>
+                <rect id="8" x="483.214" y="159.796" width="10" height="41" transform="rotate(70 483.214 159.796)" fill="white"/>
+                <rect id="9" x="495.334" y="201.664" width="10" height="41" transform="rotate(80 495.334 201.664)" fill="white"/>
+                <rect id="10" x="500" y="245" width="10" height="41" transform="rotate(90 500 245)" fill="white"/>
+                <rect id="11" x="454.957" y="291.216" width="10" height="41" transform="rotate(-80 454.957 291.216)" fill="white"/>
+                <rect id="12" x="444.687" y="326.181" width="10" height="41" transform="rotate(-70 444.687 326.181)" fill="white"/>
+                <rect id="13" x="428.5" y="358.83" width="10" height="41" transform="rotate(-60 428.5 358.83)" fill="white"/>
+                <rect id="14" x="406.89" y="388.173" width="10" height="41" transform="rotate(-50 406.89 388.173)" fill="white"/>
+                <rect id="15" x="380.513" y="413.317" width="10" height="41" transform="rotate(-40 380.513 413.317)" fill="white"/>
+                <rect id="16" x="350.17" y="433.499" width="10" height="41" transform="rotate(-30 350.17 433.499)" fill="white"/>
+                <rect id="17" x="316.784" y="448.106" width="10" height="41" transform="rotate(-20 316.784 448.106)" fill="white"/>
+                <rect id="18" x="281.369" y="456.693" width="10" height="41" transform="rotate(-10 281.369 456.693)" fill="white"/>
+                <rect id="19" x="245" y="459" width="10" height="41" fill="white"/>
+                <rect id="20" x="208.784" y="454.957" width="10" height="41" transform="rotate(10 208.784 454.957)" fill="white"/>
+                <rect id="21" x="173.82" y="444.686" width="10" height="41" transform="rotate(20 173.82 444.686)" fill="white"/>
+                <rect id="22" x="141.17" y="428.499" width="10" height="41" transform="rotate(30 141.17 428.499)" fill="white"/>
+                <rect id="23" x="111.828" y="406.889" width="10" height="41" transform="rotate(40 111.828 406.889)" fill="white"/>
+                <rect id="24" x="86.6831" y="380.512" width="10" height="41" transform="rotate(50 86.6831 380.512)" fill="white"/>
+                <rect id="25" x="66.501" y="350.17" width="10" height="41" transform="rotate(60 66.501 350.17)" fill="white"/>
+                <rect id="26" x="51.8945" y="316.784" width="10" height="41" transform="rotate(70 51.8945 316.784)" fill="white"/>
+                <rect id="27" x="43.3071" y="281.368" width="10" height="41" transform="rotate(80 43.3071 281.368)" fill="white"/>
+                <rect id="28" x="41" y="245" width="10" height="41" transform="rotate(90 41 245)" fill="white"/>
+                <rect id="29" x="2.93066" y="211.512" width="10" height="41" transform="rotate(-80 2.93066 211.512)" fill="white"/>
+                <rect id="30" x="13.3672" y="169.193" width="10" height="41" transform="rotate(-70 13.3672 169.193)" fill="white"/>
+                <rect id="31" x="30.9941" y="129.33" width="10" height="41" transform="rotate(-60 30.9941 129.33)" fill="white"/>
+                <rect id="32" x="55.2754" y="93.1332" width="10" height="41" transform="rotate(-50 55.2754 93.1332)" fill="white"/>
+                <rect id="33" x="85.4731" y="61.7028" width="10" height="41" transform="rotate(-40 85.4731 61.7028)" fill="white"/>
+                <rect id="34" x="120.67" y="35.9935" width="10" height="41" transform="rotate(-30 120.67 35.9935)" fill="white"/>
+                <rect id="35" x="159.797" y="16.7869" width="10" height="41" transform="rotate(-20 159.797 16.7869)" fill="white"/>
+                <rect id="36" x="201.664" y="4.66626" width="10" height="41" transform="rotate(-10 201.664 4.66626)" fill="white"/>
+                
+                </svg>
+                </div>
+                <div class="button-alignment">
+                <button id="startTimer"><img src="assets/icons/play.svg" alt=""></button>
+    <button id="stopTimer" disabled><img src="assets/icons/pause.svg" alt=""></button>
+</div>
+            </section>
     </article>
 
     <article id="stopwatch">
         <!-- <h2>Stop watch</h2> -->
         <section id="watch_form">
                 <form action="">
-                    <input type="number" name="watch_m" id="watch_m" value="0"> :
-                    <input type="number" name="watch_s" id="watch_s" value="0">
+                    <input type="number" name="watch_h" id="watch_h" value="0">:<input type="number" name="watch_m" id="watch_m" value="0">:<input type="number" name="watch_s" id="watch_s" value="0">
                 </form>
                 <button id="watch_start">Start</button>
                 <button id="watch_stop">Pause</button>

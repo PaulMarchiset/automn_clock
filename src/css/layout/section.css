@@ -3,8 +3,8 @@ article {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: all 0.5s ease-in-out;
 }
+
 
 #digital {
 text-align: center;
@@ -15,4 +15,55 @@ font-weight: 300;
 #analogue {
     display: flex;
     justify-content: center;
+}
+
+.svg-timer-relative {
+    position: relative;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.svg-input-absolute {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    text-align: center;
+    z-index: 1;
+    width: fit-content;
+    height: fit-content;
+    
+    font-size: 8vw;
+}
+
+
+.section-timer {
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes colorChangeAnimation {
+    0% {
+        fill: #DB7217;
+    }
+    25% {
+        fill: #BE4836;
+    }
+    50% {
+        fill: #662B1B;
+    }
+    75% {
+        fill: #5A0908;
+    }
+    100% {
+        fill: #5A0908;
+    }
+}
+
+/* Apply the animation to the rectangles */
+#timer rect {
+    fill: white; /* Initial color */
+    animation-fill-mode: both; /* Keeps the final color after animation */
 }

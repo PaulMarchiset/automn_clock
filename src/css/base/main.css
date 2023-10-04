@@ -23,3 +23,20 @@ max-height: 65vh;
     transition: all 0.3s ease-out;
     fill: #FBE5BC;
 }
+
+
+
+input {
+    all: unset;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    width: 46%;
+}
+
+#minutes {
+    text-align: right;
+}
+
+#seconds {
+    text-align: left;
+}
