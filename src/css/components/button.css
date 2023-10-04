@@ -2,3 +2,14 @@
     transform: rotate(330deg);
     cursor: pointer;
 }
+
+.buttonLeaf:hover {
+    cursor: pointer;
+    fill: #E39600;
+}
+
+.buttonLeaf.active {
+  fill: #FDC209; /* Change this to the desired hover color */
+  transition: fill 0.5s ease-in-out;
+}
+

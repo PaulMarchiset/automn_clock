@@ -5,6 +5,13 @@ body {
     transition: all 0.3s ease-out;
 }
 
+#analogue g {
+    transform-origin: 50% 50%;
+}
+#analogue svg {
+max-height: 65vh;
+}
+
 .dark-mode {
     transition: all 0.3s ease-out;
     background-color: #5A0908;
