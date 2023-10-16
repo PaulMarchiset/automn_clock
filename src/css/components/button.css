@@ -14,14 +14,34 @@
 }
 
 .button-alignment {
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: auto;
     margin: 40px auto;
 }
 .button-alignment > button {
+    position: relative;
     background-color: transparent;
     border: none;
+    transition: transform 0.3s ease;
+}
+
+.button-alignment > button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.button-alignment.prototype-btn {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-inline: 5em;
+}
+
+#startTimer {
+    padding-inline: 2em;
+}
+
+#stopTimer {
+    padding-inline: 2em;
 }

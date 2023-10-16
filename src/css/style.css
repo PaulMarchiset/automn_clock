@@ -14,6 +14,7 @@
   @import "components/menu.css";
 @import "components/hero.css";
 @import "components/button.css";
+@import "components/colors.css";
   
   /* fonts */
-  @import url("https://use.typekit.net/mwi3ggm.css");
+@import url("https://use.typekit.net/mwi3ggm.css");

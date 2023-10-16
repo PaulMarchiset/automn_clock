@@ -1,0 +1,37 @@
+.colors {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.colors div {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.color_1 {
+  background-color: white;
+}
+
+.color_2 {
+  background-color: #FBE5BC;
+}
+
+.color_3 {
+  background-color: #FDC209;
+}
+
+.color_4 {
+  background-color: #FE8C00;
+}
+
+.color_5 {
+  background-color: #C36030;
+}
+
+.color_6 {
+  background-color: #5A0908;
+}
+
+.color_7 {
+  background-color: #000000;
+}

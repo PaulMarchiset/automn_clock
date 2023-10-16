@@ -6,6 +6,7 @@ article {
 }
 
 
+
 #digital {
 text-align: center;
 font-size: 4.5rem;
@@ -34,8 +35,18 @@ font-weight: 300;
     z-index: 1;
     width: fit-content;
     height: fit-content;
-    
-    font-size: 8vw;
+    font-weight: 300;
+    font-size: 4.5rem;
+}
+
+.svg-input-absolute.prototype-input {
+    position: relative;
+    text-align: center;
+    z-index: 1;
+    width: fit-content;
+    height: fit-content;
+    font-weight: 300;
+    font-size: 4.5rem;
 }
 
 

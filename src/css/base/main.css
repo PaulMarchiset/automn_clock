@@ -5,6 +5,30 @@ body {
     transition: all 0.3s ease-out;
 }
 
+h1 {
+    font-size: 8vw;
+    margin: 0;
+    font-style: normal;
+    color: #5A0908;
+}
+
+.dark-mode h1 {
+    color: #FBE5BC;
+}
+
+.prototype {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#digital p {
+    margin: 0;
+    font-size: 1.5rem;
+    cursor: pointer
+}
+
 #analogue g {
     transform-origin: 50% 50%;
 }
@@ -24,13 +48,57 @@ max-height: 65vh;
     fill: #FBE5BC;
 }
 
+.dark-mode .play {
+    fill: #DDCE52;
+}
+
+.dark-mode .pause {
+    fill: #CB001D;
+}
+
+.dark-mode .reset {
+    fill: #FFCB00;
+    stroke: #FFCB00;
+}
 
 
 input {
     all: unset;
     -webkit-appearance: none;
     -moz-appearance: textfield;
-    width: 46%;
+    width: 2ch;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;}
+
+.stopwatch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px auto;
+    text-align: center;
+    font-size: 7rem;
+    font-weight: 300;
+}
+
+.stopwatch input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#watch_h {
+    text-align: right;
+}
+
+#watch_m {
+    text-align: center;
+}
+
+#watch_s {
+    text-align: left;
 }
 
 #minutes {

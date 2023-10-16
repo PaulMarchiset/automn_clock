@@ -1,4 +1,25 @@
 anime({
+  targets: ".scrolling-arrow",
+  translateY: [-2, 3],
+  duration: 750,
+  easing: "easeInOutQuad",
+  direction: "alternate",
+  loop: true
+});
+
+const resetBtn = document.getElementById("watch_reset");
+
+let rotation = 0; 
+
+resetBtn.addEventListener("click", () => {
+  rotation -= 360;
+  resetBtn.style.transform = `rotate(${rotation}deg)`;
+  resetBtn.style.transition = `transform 1s ease-in-out`;
+});
+
+
+
+anime({
   targets: ".leaf_hero .leaf_orange",
   translateX: -20,
   rotate: -20,
