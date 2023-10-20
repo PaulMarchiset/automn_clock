@@ -1,3 +1,4 @@
+// Dark mode
 const buttonDark = document.getElementById("dark-mode-button");
 let darkModeActive = false;
 
@@ -40,22 +41,24 @@ buttonDark.removeEventListener("click", darkMode);
 buttonDark.addEventListener("click", darkMode);
 
 
+
 // CLOCK
-let currentCity = "America/Toronto"; // Initial city
+let currentCity = "America/Toronto";
 document.getElementById("city").addEventListener("click", function () {
-  // Toggle city
   if (currentCity === "America/Toronto") {
     currentCity = "Europe/Paris";
     document.getElementById("city").textContent = "Paris";
   } else {
     currentCity = "America/Toronto";
-    document.getElementById("city").textContent = "Toronto";
+    document.getElementById("city").textContent = "Montréal";
   }
 });
 
 let clockF = async function () {
   try {
-    let response = await fetch(`http://worldtimeapi.org/api/timezone/${currentCity}`);
+    let response = await fetch(
+      `http://worldtimeapi.org/api/timezone/${currentCity}`
+    );
     let data = await response.json();
 
     let h = data.datetime.slice(11, 13);
@@ -70,7 +73,6 @@ let clockF = async function () {
     document.getElementById("svg_s").style.transform = `rotate(${M * 6}deg)`;
     document.getElementById("svg_m").style.transform = `rotate(${m * 6}deg)`;
     document.getElementById("svg_h").style.transform = `rotate(${h * 30}deg)`;
-
   } catch (error) {
     console.error("Error fetching the time:", error);
   }
@@ -86,81 +88,79 @@ document.addEventListener("DOMContentLoaded", function () {
   const secondsInput = document.getElementById("seconds");
   const startTimerButton = document.getElementById("startTimer");
   const stopTimerButton = document.getElementById("stopTimer");
-  const timerRectangles = document.querySelectorAll('#timer rect');
+  const timerSVG = document.getElementById("timer");
+  const rectangles = timerSVG.querySelectorAll("rect");
 
-  let totalSeconds = 0;
-  let animationInterval;
+  let animationTimeout;
   let animationPaused = false;
+  let remainingTime = 0;
 
-  function updateTimerDisplay() {
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-    minutesInput.value = String(minutes).padStart(2, '0');
-    secondsInput.value = String(seconds).padStart(2, '0');
+
+  function updateTimeRemainingDisplay(remainingTime) {
+    const minutes = Math.floor(remainingTime / 60);
+    const seconds = remainingTime % 60;
+    minutesInput.value = String(minutes).padStart(2, "0");
+    secondsInput.value = String(seconds).padStart(2, "0");
   }
 
-  function resetRectangles() {
-    timerRectangles.forEach((rect) => {
-      rect.style.animation = 'none';
-      rect.style.animationPlayState = 'paused';
-      rect.style.fill = 'white'; // Reset rectangle fill to white
-    });
-  }
-
-  function startColorChangeAnimation() {
-    resetRectangles();
-    timerRectangles.forEach((rect, index) => {
-      const delay = (totalSeconds * 1000 / timerRectangles.length) * index;
-      rect.style.animation = `colorChangeAnimation ${totalSeconds}s linear ${delay}ms forwards`;
-      rect.style.animationPlayState = 'running';
-    });
-  }
-
-  function startTimer() {
-    const minutesInputValue = parseInt(minutesInput.value);
-    const secondsInputValue = parseInt(secondsInput.value);
-    totalSeconds = minutesInputValue * 60 + secondsInputValue;
-    updateTimerDisplay();
-    startColorChangeAnimation();
-    minutesInput.disabled = true;
-    secondsInput.disabled = true;
-    startTimerButton.disabled = true;
-    stopTimerButton.disabled = false;
-
-    if (animationInterval) {
-      clearInterval(animationInterval);
+  function startOrResumeColorChangeAnimation() {
+    if (animationPaused) {
+      remainingTime = parseInt(minutesInput.value) * 60 + parseInt(secondsInput.value);
+    } else {
+      const minutesInputValue = parseInt(minutesInput.value);
+      const secondsInputValue = parseInt(secondsInput.value);
+      remainingTime = minutesInputValue * 60 + secondsInputValue;
     }
 
-    animationInterval = setInterval(function () {
-      if (totalSeconds > 0) {
-        totalSeconds--;
-        updateTimerDisplay();
+    const delayIncrement = (remainingTime * 1000) / rectangles.length;
+
+    if (animationPaused || remainingTime > 0) {
+      rectangles.forEach((rect, index) => {
+        rect.style.animationPlayState = "running";
+      });
+      minutesInput.disabled = false;
+      secondsInput.disabled = false;
+      animationPaused = false;
+    }
+
+    rectangles.forEach((rect, index) => {
+      rect.style.animation = "none";
+      rect.getBoundingClientRect();
+    });
+
+    rectangles.forEach((rect, index) => {
+      rect.style.animation = `colorChangeAnimation ${remainingTime}s linear forwards ${
+        index * delayIncrement
+      }ms`;
+    });
+
+    animationTimeout = setInterval(function () {
+      if (remainingTime > 0) {
+        remainingTime--;
+        updateTimeRemainingDisplay(remainingTime);
       } else {
-        clearInterval(animationInterval);
-        stopTimerButton.disabled = true;
-        minutesInput.disabled = false;
-        secondsInput.disabled = false;
-        startTimerButton.disabled = false;
+        clearInterval(animationTimeout);
+        stopColorChangeAnimation();
       }
     }, 1000);
   }
 
-  function stopTimer() {
-    clearInterval(animationInterval);
-    timerRectangles.forEach((rect, index) => {
-      rect.style.animationPlayState = 'paused';
-    });
-    animationPaused = true;
+  function stopColorChangeAnimation() {
     minutesInput.disabled = false;
     secondsInput.disabled = false;
     startTimerButton.disabled = false;
+    stopTimerButton.disabled = false;
+    rectangles.forEach((rect) => {
+      rect.style.animationPlayState = "paused";
+    });
+
+    clearInterval(animationTimeout);
+    animationPaused = true;
   }
 
-  startTimerButton.addEventListener("click", startTimer);
-  stopTimerButton.addEventListener("click", stopTimer);
+  startTimerButton.addEventListener("click", startOrResumeColorChangeAnimation);
+  stopTimerButton.addEventListener("click", stopColorChangeAnimation);
 });
-
-
 
 
 
@@ -179,10 +179,11 @@ let watch = function () {
       s = 0;
       m++;
     } else if (m == 59) {
-        m = 0;
-        h++;
+      m = 0;
+      h++;
     } else {
-        s++; }
+      s++;
+    }
     document.getElementById("watch_s").value = s;
     document.getElementById("watch_m").value = m;
     document.getElementById("watch_h").value = h;
@@ -198,106 +199,57 @@ let watch = function () {
     document.getElementById("watch_s").value = 0;
     document.getElementById("watch_m").value = 0;
     document.getElementById("watch_h").value = 0;
-    //clearInterval(i);
   });
 };
 watch();
 
-//NAVIGATION
-    // let ui = function () {
-    // let c = document.getElementById("clock");
-    // let d = document.getElementById("countdown");
-    // let w = document.getElementById("stopwatch");
 
-    // let buttonClock = document.getElementById("buttonClock");
-    // let buttonTimer = document.getElementById("buttonTimer");
-    // let buttonStop = document.getElementById("buttonStop");
-    
-    // let C = document.getElementById("nav_clock");
-    // let D = document.getElementById("nav_down");
-    // let W = document.getElementById("nav_watch");
+function ui() {
+  let c = document.getElementById("clock");
+  let d = document.getElementById("countdown");
+  let w = document.getElementById("stopwatch");
 
-    // c.style.display = "flex";
-    // d.style.display = "none";
-    // w.style.display = "none";
+  let buttonClock = document.getElementById("buttonClock");
+  let buttonTimer = document.getElementById("buttonTimer");
+  let buttonStop = document.getElementById("buttonStop");
 
-    // C.addEventListener("click", function () {
-    //     c.style.display = "flex";
-    //     d.style.display = "none";
-    //     w.style.display = "none";
-    //     buttonClock.style.fill = "#FDC209";
-    //     buttonTimer.style.fill = "#C36030";
-    //     buttonStop.style.fill = "#C36030";
-    //     c.style.transition = "display 0.5s ease-in-out";
-    // });
-    // D.addEventListener("click", function () {
-    //     c.style.display = "none";
-    //     d.style.display = "flex";
-    //     w.style.display = "none";
-    //     buttonClock.style.fill = "#C36030";
-    //     buttonTimer.style.fill = "#FDC209";
-    //     buttonStop.style.fill = "#C36030";
-    //     d.style.transition = "display 0.5s ease-in-out";
-    // });
-    // W.addEventListener("click", function () {
-    //     c.style.display = "none";
-    //     d.style.display = "none";
-    //     w.style.display = "flex";
-    //     buttonClock.style.fill = "#C36030";
-    //     buttonTimer.style.fill = "#C36030";
-    //     buttonStop.style.fill = "#FDC209";
-    //     w.style.transition = "display 0.5s ease-in-out";
-    // });
-    // };
-    // ui();
+  let C = document.getElementById("nav_clock");
+  let D = document.getElementById("nav_down");
+  let W = document.getElementById("nav_watch");
 
-    function ui() {
-        let c = document.getElementById("clock");
-        let d = document.getElementById("countdown");
-        let w = document.getElementById("stopwatch");
-      
-        let buttonClock = document.getElementById("buttonClock");
-        let buttonTimer = document.getElementById("buttonTimer");
-        let buttonStop = document.getElementById("buttonStop");
-      
-        let C = document.getElementById("nav_clock");
-        let D = document.getElementById("nav_down");
-        let W = document.getElementById("nav_watch");
-      
-        c.style.display = "flex";
-        buttonClock.classList.add("active");
-        c.classList.add("show");
-        d.style.display = "none";
-        w.style.display = "none";
-      
-        function setActiveButton(activeButton) {
-          // Remove the "active" class from all buttons
-          buttonClock.classList.remove("active");
-          buttonTimer.classList.remove("active");
-          buttonStop.classList.remove("active");
-      
-          // Add the "active" class to the active button
-          activeButton.classList.add("active");
-        }
-      
-        C.addEventListener("click", function () {
-          c.style.display = "flex";
-          d.style.display = "none";
-          w.style.display = "none";
-          setActiveButton(buttonClock);
-        });
-        D.addEventListener("click", function () {
-          c.style.display = "none";
-          d.style.display = "flex";
-          w.style.display = "none";
-          setActiveButton(buttonTimer);
-        });
-        W.addEventListener("click", function () {
-          c.style.display = "none";
-          d.style.display = "none";
-          w.style.display = "flex";
-          setActiveButton(buttonStop);
-        });
-      }
-      
-      ui();
+  c.style.display = "flex";
+  buttonClock.classList.add("active");
+  c.classList.add("show");
+  d.style.display = "none";
+  w.style.display = "none";
+
+  function setActiveButton(activeButton) {
+
+    buttonClock.classList.remove("active");
+    buttonTimer.classList.remove("active");
+    buttonStop.classList.remove("active");
+
+    activeButton.classList.add("active");
+  }
+
+  C.addEventListener("click", function () {
+    c.style.display = "flex";
+    d.style.display = "none";
+    w.style.display = "none";
+    setActiveButton(buttonClock);
+  });
+  D.addEventListener("click", function () {
+    c.style.display = "none";
+    d.style.display = "flex";
+    w.style.display = "none";
+    setActiveButton(buttonTimer);
+  });
+  W.addEventListener("click", function () {
+    c.style.display = "none";
+    d.style.display = "none";
+    w.style.display = "flex";
+    setActiveButton(buttonStop);
+  });
+}
+
+ui();

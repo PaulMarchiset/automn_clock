@@ -1,3 +1,4 @@
+// arrow scroll prototype
 anime({
   targets: ".scrolling-arrow",
   translateY: [-2, 3],
@@ -7,9 +8,20 @@ anime({
   loop: true
 });
 
-const resetBtn = document.getElementById("watch_reset");
 
-let rotation = 0; 
+// leaf animation logo
+document.addEventListener("DOMContentLoaded", function () {
+const yellowLeaf = document.getElementById("yellow_leaf");
+const orangeLeaf = document.getElementById("orange_leaf");
+
+orangeLeaf.style.animation = "orangeLeaf 2.5s ease-out"; 
+yellowLeaf.style.animation = "yellowLeaf 2.5s ease-out"; 
+});
+
+
+// reset button
+const resetBtn = document.getElementById("watch_reset");
+let rotation = 0;
 
 resetBtn.addEventListener("click", () => {
   rotation -= 360;
@@ -18,17 +30,7 @@ resetBtn.addEventListener("click", () => {
 });
 
 
-
-anime({
-  targets: ".leaf_hero .leaf_orange",
-  translateX: -20,
-  rotate: -20,
-  duration: 750,
-  opacity: 1,
-  direction: "alternate",
-  ease: "easeInOutSine",
-});
-
+// CLOCK BUTTON
 const buttonClock = document.getElementById("nav_clock");
 
 function startAnimationClock() {
@@ -57,9 +59,10 @@ function startAnimationClock() {
 }
 
 buttonClock.removeEventListener("click", startAnimationClock);
-
 buttonClock.addEventListener("click", startAnimationClock);
 
+
+// TIMER BUTTON
 const buttonTimer = document.getElementById("nav_down");
 
 function startAnimationTimer() {
@@ -88,9 +91,10 @@ function startAnimationTimer() {
 }
 
 buttonTimer.removeEventListener("click", startAnimationTimer);
-
 buttonTimer.addEventListener("click", startAnimationTimer);
 
+
+// STOP WATCH BUTTON
 const buttonStop = document.getElementById("nav_watch");
 
 function startAnimationStop() {
@@ -119,5 +123,4 @@ function startAnimationStop() {
 }
 
 buttonStop.removeEventListener("click", startAnimationStop);
-
 buttonStop.addEventListener("click", startAnimationStop);

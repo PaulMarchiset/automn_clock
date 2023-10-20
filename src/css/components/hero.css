@@ -1,7 +1,31 @@
 .hero {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes yellowLeaf {
+  0% {
+    transform: translateY(-100vh);
+    -webkit-transform: translate3d(-100vw, 10vh, 0) rotate(-90deg);
+  }
+  100% {
+    transform: translateY(0);
+    -webkit-transform: translate3d(300, 0, 0) rotate(0deg);
+  }
+}
+
+@keyframes orangeLeaf {
+  0% {
+    transform: translateY(-100vh);
+    -webkit-transform: translate3d(-100vw, -100vh, 0) rotate(-100deg);
+  }
+  100% {
+    transform: translateY(0);
+    -webkit-transform: translate3d(300, 0, 0) rotate(0deg);
+  }
 }
